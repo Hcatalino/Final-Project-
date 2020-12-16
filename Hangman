@@ -1,0 +1,50 @@
+#Hector Catalino
+#Programing for it
+#Final Project
+#This is a piece of code that will allow the user to play a game of hangman.
+
+import random
+#This would allow me to use the words that I store into the code.
+Words = open('Words.txt')
+#This will allow me to excute the words that have spaces between them and skip those words.
+def UseWords(Words):
+    #This will allow the program to choice a word at random.
+    Word = random.choice(Words)
+    #This piece of code will allow me to skip the word with dashes and spaces.
+    while '-' in Word or ' ' in Word:
+        Word = random.choice(Word)
+#Returns the word that was choosen and sends it back to the user.
+    return Word
+#This will excute the main part of the hangman code.
+def Hangman():
+    #This will store the words that is taken and storing it in a varible to be use for later.
+    Word = UseWords(Words)
+    #This will set the words into a random order.
+    Letters = set(Word)
+    #This will help to make the letter written to only come out to be in capital letter.
+    Alpha = set(string.ascii_uppercase)
+    #This will put the letter used and stores it randomly.
+    UsedLetters = set()
+#This loop code will allow me to give the user lives when guessing some letters.
+    while len(Letters) > 0:
+        #This will print the words that been used and put them will the used letters.
+        print('You have used these letters: ', ' '.join(UsedLetters))
+        #This is a word list that will allow letters to be stored in the word list.
+        wordlist = [letter if letter in UsedLetters else '-' for letter in Word]
+        #prints out the words that are beeing use and store it in the wordlist
+        print('Current word: ', ' '.join(wordlist))
+#This will allow the user to input a letter they would like to use and turns the letter into an uppercase.
+        userletter = input('Guess a letter: ').upper()
+        #This is an if statement when the user uses already that has been used.
+        if userletter in alpha - UsedLetters:
+            #This used letter is added to the letter that the user used.
+            UsedLetters.add(userletter)
+            #This will remove a letter that the user used.
+            if userletter in Letters:
+                Letters.remove(userletter)
+                #If the user inputs a word it already used.
+        elif userletter in UsedLetters:
+            print(' You have already Used this letter: Please use another one ')
+            #This will print if they write an invalid character like a number.
+        else:
+            print('Invalid Character. Try again ')
