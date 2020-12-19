@@ -2,49 +2,70 @@
 #Programing for it
 #Final Project
 #This is a piece of code that will allow the user to play a game of hangman.
-
+#This piece of code would allow me to choice stuff at random
 import random
-#This would allow me to use the words that I store into the code.
-Words = open('Words.txt')
-#This will allow me to excute the words that have spaces between them and skip those words.
-def UseWords(Words):
-    #This will allow the program to choice a word at random.
-    Word = random.choice(Words)
-    #This piece of code will allow me to skip the word with dashes and spaces.
-    while '-' in Word or ' ' in Word:
-        Word = random.choice(Word)
-#Returns the word that was choosen and sends it back to the user.
-    return Word
-#This will excute the main part of the hangman code.
-def Hangman():
-    #This will store the words that is taken and storing it in a varible to be use for later.
-    Word = UseWords(Words)
-    #This will set the words into a random order.
-    Letters = set(Word)
-    #This will help to make the letter written to only come out to be in capital letter.
-    Alpha = set(string.ascii_uppercase)
-    #This will put the letter used and stores it randomly.
-    UsedLetters = set()
-#This loop code will allow me to give the user lives when guessing some letters.
-    while len(Letters) > 0:
-        #This will print the words that been used and put them will the used letters.
-        print('You have used these letters: ', ' '.join(UsedLetters))
-        #This is a word list that will allow letters to be stored in the word list.
-        wordlist = [letter if letter in UsedLetters else '-' for letter in Word]
-        #prints out the words that are beeing use and store it in the wordlist
-        print('Current word: ', ' '.join(wordlist))
-#This will allow the user to input a letter they would like to use and turns the letter into an uppercase.
-        userletter = input('Guess a letter: ').upper()
-        #This is an if statement when the user uses already that has been used.
-        if userletter in alpha - UsedLetters:
-            #This used letter is added to the letter that the user used.
-            UsedLetters.add(userletter)
-            #This will remove a letter that the user used.
-            if userletter in Letters:
-                Letters.remove(userletter)
-                #If the user inputs a word it already used.
-        elif userletter in UsedLetters:
-            print(' You have already Used this letter: Please use another one ')
-            #This will print if they write an invalid character like a number.
+#A list of the words the program will use for hangman.
+words = ['python', 'program', 'penta', 'information', 'technology', 'coding', 'security','text', 'happyholidays', 'winterbreak']
+#This will allow the program to choice a words at random from the list
+usedwords = random.choice(words)
+#This will give the user a small hint telling them the length of the word
+print('The word has', len(usedwords), 'letter: ')
+#This will be use to store the right letters.
+rightAns = ['_'] * len(usedwords)
+#THIS CODE WILL STORE THE WRONG LETTER.
+wrongAns = []
+#THIS WILL BE A FUNCTION THAT WILL ALLOW THE PROGRAM TO PRINT A NEW LINE AFTERWARD.
+def correctletter():
+    #A LOOP TO MAKE A NEW LINE FROM CORRECT LETTER.
+    for A in rightAns:
+        #THIS WILL PRINT OUT THE LETTER AND A NEW LINE WILL BE MADE.
+        print(A, end = ' ')
+    print()
+correctletter()
+#THIS WILL KEEP THE PROGRAM GOING IF EVERYTHING COMES OUT TO BE TRUE.
+while True:
+    #THIS WILL PRINT THE DASHES AFTER EVERY INPUT SO IT COULD BE SEPERATED.
+    print('-------------------------------')
+    #THIS WILL ALLOW THE PROGRAM TO STORE THE LETTER THE USER WANTS TO USE.
+    userletter = input('Picked a letter: ')
+    #AN IF STATEMENT TO SEE IF THE LETTER THAT THE USER WROTE IS IN THE WORD.
+    if userletter in usedwords:
+        #THIS WILL BE THE SPOT THAT THE LETTER WILL GO.
+        letter = 0
+        #ANOTHER LOOP TO MAKE IT CHECK FOR THE WORD.
+        for A in usedwords:
+            #IF THE LETTER IS ALSO FROM THE USER INPUT.
+            if A == userletter:
+                #THIS WILL STORE THE ANSWER FROM THE USER INTO THE WORD.
+                rightAns[letter] = userletter
+                #THIS WILL ADD TO THE RIGHT STORE ANSWER.
+            letter += 1
+        correctletter()
+    else:
+        #THIS IS ONLY IF THE LETTER THAT THE USER USED IS NOT IN THE WRONG ANSWER.
+        if userletter not in wrongAns:
+            #THIS WILL ADD THE WRONG LETTER THAT THE USER USED.
+            wrongAns.append(userletter)
+            #THIS WILL PRINT ALL OF THE WRONG LETTER USED.
+            print('Wrong:', wrongAns)
         else:
-            print('Invalid Character. Try again ')
+            #IF THE LETTER WAS ALREADY USED IT WILL TELL THE USER.
+            print('You already used the letter: ')
+            #THIS WILL PRINT THE LIST OF WRONG LETTERS
+            print(wrongAns)
+            #THIS WILL BE THE LIFE OF THE USER.
+    if len(wrongAns) > 7:
+        #IF THE LIVE OF THE USER REACH OVER SEVEN WRONG ANSWER THEN ITS GAMEOVER.
+        print('GAME OVER')
+        print('      ','(>_<)')
+        #THIS WILL PRINT THE WORD THE PROGRAM CHOICE
+        print('The word was', usedwords)
+        #THIS WILL END THE PROGRAM.
+        break
+        #THIS WILL SEE IF THERE ARE STILL ANY MISSING SPOT IN THE WORD.
+    if '_' not in rightAns:
+        #IF THERE ARE NO SPOT LEFT THEN YOU WON THE GAME.
+        print('YOU WON: ')
+        print('      ','\(^ ^)/')
+        #THIS WILL END THE PROGRAM.
+        break
