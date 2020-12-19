@@ -1,3 +1,3 @@
-# Final-Project-
-Hector Catalino
-This code will be to create a game of Hangman in which the program will choose a word at random from a file and with that the user will have to figure out what the word is by putting any letter he wants and if he gets it right the letter is added and if the letter is incorrect one life out of five is taken from the user until either the user gets the word right or runs out of life.
+#Final-Project-
+#Hector Catalino
+I made a simple game of Hangman this game will choice words at random from the words that I wrote in there and it was made simple so that other people can change the words they would like to use. It will be weird at first, but the words can only be put in lowercase. This game of Hangman also includes a live system you could easily change how many lives you would like to do, but at first the lives are only at 7. The program will also determine if you either you won the game or lose the game. It will also store the wrong choice from the right choice and this will help the program determine if you either won or not. 
