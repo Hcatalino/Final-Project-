@@ -1,0 +1,4 @@
+This project was really fun to make and learn some new things about python, while writing this code I made it so that the other people who would want to wouldn't have a tough time running the code.
+There are no specific things you need to do to run the code, you will need a command line like, cmd, powershell, or anything like that to run the program.
+The modules that are in the code are only the random module which will allow the program to choose a word at random.
+Future Work - One thing I would've want to work more on if I had more time and knowledge would be able to make a hangman everytime the user will get a letter wrong and also trying to create a GUI since most of the other Hangman will have a GUI I would want to try and make it for my code.
